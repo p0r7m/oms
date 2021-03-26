@@ -1,20 +1,4 @@
-package main
-
-type IPartner interface {
-	AddMenuItem(int, string, float64)
-}
-
-type MenuItem struct {
-	itemName string
-	price    float64
-	itemId   int
-}
-
-type Menu struct {
-	name   string
-	menuId int
-	items  []MenuItem
-}
+package partner
 
 type Partner struct {
 	id              int
@@ -36,6 +20,10 @@ func (p *Partner) IsEligible() bool {
 	return p.capacity != 0
 }
 
+func (p *Partner) GetMenuWithItems() []MenuItem {
+	return p.menu.GetMenuItems()
+}
+
 func (p *Partner) AddMenuItem(id int, name string, price float64) {
 
 	if p.menu == nil {
@@ -44,4 +32,14 @@ func (p *Partner) AddMenuItem(id int, name string, price float64) {
 	item := MenuItem{itemId: id, itemName: name, price: price}
 	p.menu.items = append(p.menu.items, item)
 }
+
+func (p *Partner) SetId(id int) {
+	p.id = id
+}
+
+func (p *Partner) SetCapacity(cap int) {
+	p.capacity = cap
+}
+
+
 
